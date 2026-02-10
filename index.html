@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevOps Learning Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container">
+        <p class="badge">Always fresh learning + interview prep</p>
+        <h1>DevOps Learning Hub</h1>
+        <p>
+          Learn Linux, CI/CD, Docker, Kubernetes, Cloud, Monitoring, and Security
+          with production-focused guidance from a senior engineer mindset.
+        </p>
+        <p class="updated" id="last-updated">Checking latest content...</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section>
+        <h2>Skill Roadmap</h2>
+        <div id="skill-grid" class="grid"></div>
+      </section>
+
+      <section>
+        <h2>Interview Prep</h2>
+        <div class="panel">
+          <label for="role-select">Select role:</label>
+          <select id="role-select">
+            <option value="all">All roles</option>
+          </select>
+          <button id="new-question" type="button">Give me a question</button>
+          <article id="question-card" class="question-card">
+            <h3>Ready?</h3>
+            <p>Pick a role and click the button to start practicing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Latest DevOps Articles (auto-updated)</h2>
+        <ul id="article-list" class="list"></ul>
+      </section>
+
+      <section>
+        <h2>Trending Open Source Projects (auto-updated)</h2>
+        <ul id="project-list" class="list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Tip: Bookmark this page and revisit often — article/project sections refresh
+        on each visit.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

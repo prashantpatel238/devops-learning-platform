@@ -1,0 +1,131 @@
+{
+  "skills": [
+    {
+      "name": "Linux & Networking",
+      "description": "In production, Linux and networking are where most outages first appear: CPU steal on noisy cloud hosts, DNS misconfiguration during cutovers, or firewall rules blocking east-west traffic.",
+      "productionScenario": "You are on call for an API fleet behind a load balancer. Error rate spikes after a node replacement. You must validate routing tables, DNS answers, MTU mismatches, and connection tracking saturation before blaming application code.",
+      "scaleConsiderations": "At 1-2 servers, manual SSH is acceptable. At 500+ nodes, you need immutable images, standardized OS hardening, and automated diagnostics because one bad kernel/network setting can cascade quickly.",
+      "commonMistakes": [
+        "Treating DNS as static; not planning TTL strategy before migrations.",
+        "Ignoring ephemeral port exhaustion and connection limits under high outbound traffic.",
+        "Using ad-hoc SSH changes instead of codified baselines, making incidents harder to reproduce."
+      ],
+      "costImplications": "Poor network architecture drives cross-AZ/region transfer costs. Over-provisioned bastion/NAT designs and chatty microservices can silently become one of the largest monthly cloud line items.",
+      "securityImplications": "Weak SSH key hygiene, broad security groups, and unmanaged sudo access create high blast radius. Use least privilege, host hardening baselines, and centralized audit logging.",
+      "incidentExample": "A retail team moved a payments service to new subnets but forgot conditional DNS forwarders in one environment. 30% of checkout calls timed out for 47 minutes until DNS pathing was corrected.",
+      "resources": [
+        "Linux Journey",
+        "The Linux Command Line (book)",
+        "Practical Networking"
+      ]
+    },
+    {
+      "name": "Version Control & CI/CD",
+      "description": "CI/CD is your change management system. In mature teams, pipeline quality directly correlates with deployment safety, lead time, and recovery speed.",
+      "productionScenario": "A fintech team deploys multiple times daily. Pipelines run unit/integration/security checks, package artifacts immutably, and gate production with approvals and automated rollback criteria.",
+      "scaleConsiderations": "As teams scale, pipeline duration and queue contention become bottlenecks. You need test parallelization, shared build caches, and clear ownership boundaries across repos/services.",
+      "commonMistakes": [
+        "Running slow monolithic pipelines that engineers bypass under pressure.",
+        "No artifact immutability; rebuilding from source at deploy time causes drift.",
+        "No release guardrails (health checks/canary analysis), so bad releases spread quickly."
+      ],
+      "costImplications": "Inefficient pipelines burn compute minutes and engineer time. Flaky tests and repeated reruns can become both a direct CI bill and an indirect productivity tax.",
+      "securityImplications": "Leaked CI secrets, over-privileged runners, and unsigned artifacts are common enterprise risks. Adopt OIDC, secret scoping, and provenance/signing where possible.",
+      "incidentExample": "A team accidentally deployed debug logging with PII because a policy check was optional in one branch workflow. Incident response required log scrubbing and legal notification.",
+      "resources": [
+        "Git SCM book",
+        "GitHub Actions docs",
+        "Jenkins Pipeline docs"
+      ]
+    },
+    {
+      "name": "Containers & Orchestration",
+      "description": "Containers standardize runtime, but production Kubernetes introduces scheduling, capacity, and networking complexity that must be engineered deliberately.",
+      "productionScenario": "Your platform runs 200+ microservices on Kubernetes. During traffic surges, autoscaling, pod disruption budgets, and node headroom determine whether users see degraded performance.",
+      "scaleConsiderations": "At scale, noisy neighbors, bin-packing inefficiency, and control-plane limits matter. Right-sizing requests/limits and cluster topology is critical for stability and cost.",
+      "commonMistakes": [
+        "Setting no CPU/memory limits, allowing one workload to starve others.",
+        "Using latest image tags, making rollback and traceability difficult.",
+        "Ignoring readiness/startup probes, causing traffic to hit cold or broken pods."
+      ],
+      "costImplications": "Over-requested resources can double cluster spend. Under-requesting causes throttling/restarts and hidden business cost via poor user experience.",
+      "securityImplications": "Running as root, broad service account permissions, and unscanned images are common gaps. Enforce admission policies and image scanning.",
+      "incidentExample": "A gaming company saw intermittent 502s after a node pool upgrade because readiness probes were too shallow; pods were marked ready before warming caches.",
+      "resources": [
+        "Docker docs",
+        "Kubernetes docs",
+        "Kubernetes the Hard Way"
+      ]
+    },
+    {
+      "name": "Cloud & IaC",
+      "description": "Infrastructure as Code is essential for repeatability, reviewability, and disaster recovery. In enterprise environments, IaC is also your audit trail.",
+      "productionScenario": "A multi-account cloud setup uses Terraform with environment isolation, remote state, and policy checks. Teams promote vetted modules instead of hand-crafting infra per project.",
+      "scaleConsiderations": "As the organization grows, state locking, module versioning, and drift detection become mandatory. Without structure, parallel teams create conflicting resources and outages.",
+      "commonMistakes": [
+        "Single shared state file for too many services causing lock contention and blast radius.",
+        "Copy-paste Terraform with hidden differences across environments.",
+        "Manual console hotfixes that never get reconciled back to IaC."
+      ],
+      "costImplications": "Unmanaged cloud growth (orphaned disks, idle clusters, oversized DBs) compounds monthly. IaC with tagging and policy guardrails enables effective FinOps controls.",
+      "securityImplications": "Misconfigured IAM, public buckets, and exposed snapshots are recurring issues. Codify preventive controls and scan plans before apply.",
+      "incidentExample": "A team restored from backup into production but forgot to rotate credentials in Terraform vars. Legacy credentials remained active and were later abused.",
+      "resources": [
+        "Terraform docs",
+        "AWS Well-Architected",
+        "Azure Architecture Center"
+      ]
+    },
+    {
+      "name": "Monitoring & Security",
+      "description": "Monitoring and security are not separate tracks. In production, detection quality and response speed define customer impact during incidents.",
+      "productionScenario": "Your SRE team tracks latency, error rate, traffic, and saturation plus key security signals. Alerting routes by service ownership and severity with clear runbooks.",
+      "scaleConsiderations": "At enterprise scale, cardinality explosions in metrics/logs can break observability budgets and systems. You must design telemetry intentionally.",
+      "commonMistakes": [
+        "Alerting on everything, creating alert fatigue and missed critical pages.",
+        "No ownership metadata for services, slowing incident routing.",
+        "Collecting high-cardinality labels everywhere, making observability expensive and slow."
+      ],
+      "costImplications": "Logs and metrics can become top-3 cloud expenses. Sampling, retention tiering, and data lifecycle policies are key to sustainable observability.",
+      "securityImplications": "If audit trails are incomplete or mutable, forensic investigations fail. Centralized immutable logging and access monitoring are foundational.",
+      "incidentExample": "An enterprise lost 90 minutes during a customer outage because alerts triggered but pager routing was tied to an old team alias; no primary responder was paged.",
+      "resources": [
+        "Prometheus docs",
+        "Grafana docs",
+        "OWASP cheat sheets"
+      ]
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "role": "DevOps Engineer",
+      "question": "Your canary release increased p95 latency by 25% only in one region. How do you decide rollback vs continue, and what data do you require in 10 minutes?",
+      "focus": "Deployment risk and incident decision-making"
+    },
+    {
+      "role": "DevOps Engineer",
+      "question": "A CI queue is delaying releases by 90 minutes daily. How would you redesign the pipeline for throughput without reducing test confidence?",
+      "focus": "CI/CD at scale"
+    },
+    {
+      "role": "SRE",
+      "question": "Your service exceeded error budget for two weeks. How do you negotiate feature freeze, reliability work, and stakeholder communication?",
+      "focus": "SLO governance"
+    },
+    {
+      "role": "SRE",
+      "question": "During an incident, dashboards disagree with logs and traces. What is your triage order and how do you avoid chasing false signals?",
+      "focus": "Incident triage under uncertainty"
+    },
+    {
+      "role": "Platform Engineer",
+      "question": "How do you build a self-service platform that enforces secure defaults while keeping developer onboarding under 30 minutes?",
+      "focus": "Platform security and developer experience"
+    },
+    {
+      "role": "Cloud Engineer",
+      "question": "Your monthly cloud bill jumped 35% after regional expansion. Walk through a cost diagnosis plan and first three remediation actions.",
+      "focus": "FinOps and cloud optimization"
+    }
+  ]
+}

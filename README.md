@@ -9,7 +9,6 @@ A lightweight website for learning DevOps skills and preparing for interviews.
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.
-- Online hosting via GitHub Pages with auto-deploy workflow.
 
 ## Run locally
 

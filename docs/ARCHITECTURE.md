@@ -364,3 +364,18 @@ This includes proposed API contracts and target folder structure changes.
 - `backend/server.js` (backend AI endpoints)
 - `js/ai.js` (frontend AI flow orchestration)
 - `docs/AI_FEATURES.md` (feature contracts + UI flow diagrams)
+
+
+## 15) Automated content refresh pipeline (implemented)
+
+Implemented via GitHub Actions:
+- `.github/workflows/automated-content-updates.yml`
+- `scripts/content_change_watcher.py`
+
+Flow:
+1. Detect new releases for Kubernetes, Terraform, Docker.
+2. Generate Codex-style change summaries and suggested updates.
+3. Write artifacts to `content/auto-updates/*`.
+4. Open draft PR requiring human approval before merge/publish.
+
+See `docs/AUTOMATED_CONTENT_UPDATES.md` for runbook details.

@@ -80,3 +80,13 @@ node backend/server.js
 ```
 
 AI endpoints are served at `http://127.0.0.1:8787/api/v1/ai/*` and consumed by the UI.
+
+
+## Automated content updates (with human approval)
+
+- Workflow: `.github/workflows/automated-content-updates.yml`
+- Detection script: `scripts/content_change_watcher.py`
+- Tracks upstream changes for Kubernetes, Terraform, and Docker.
+- Generates Codex-style summaries and content update drafts.
+- Opens a **draft PR** for mandatory human review before publishing.
+- Details: `docs/AUTOMATED_CONTENT_UPDATES.md`

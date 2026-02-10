@@ -60,3 +60,9 @@ After deployment, your site will be available at:
 ## Architecture
 
 - Full system architecture: `docs/ARCHITECTURE.md`
+
+
+## API-first refactor proposal
+
+- Refactor plan: `docs/API_REFACTOR_PLAN.md`
+- Versioned API contract (OpenAPI): `docs/api/openapi.v1.yaml`

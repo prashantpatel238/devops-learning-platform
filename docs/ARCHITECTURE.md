@@ -347,3 +347,13 @@ flowchart TB
 - **Data source:** `data/content.json`
 - **Deploy workflow:** `.github/workflows/deploy-pages.yml`
 - **Architecture doc:** `docs/ARCHITECTURE.md`
+
+
+## 13) API-First Refactor Reference
+
+A conceptual migration plan for backend-served learning content, versioned APIs, and richer content metadata is documented in:
+
+- `docs/API_REFACTOR_PLAN.md`
+- `docs/api/openapi.v1.yaml`
+
+This includes proposed API contracts and target folder structure changes.

@@ -55,3 +55,8 @@ After deployment, your site will be available at:
 - `https://<your-github-username>.github.io/<repository-name>/`
 
 > Example for this repo name: `https://<your-github-username>.github.io/devops-learning-platform/`
+
+
+## Architecture
+
+- Full system architecture: `docs/ARCHITECTURE.md`

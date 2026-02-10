@@ -1,0 +1,26 @@
+global:
+  imagePullPolicy: IfNotPresent
+
+frontend:
+  replicaCount: 2
+  image:
+    repository: ghcr.io/example/devops-learning-frontend
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 80
+
+backend:
+  replicaCount: 2
+  image:
+    repository: ghcr.io/example/devops-learning-backend
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 8787
+
+ingress:
+  enabled: true
+  className: nginx
+  host: devops-learning.example.com
+  annotations: {}

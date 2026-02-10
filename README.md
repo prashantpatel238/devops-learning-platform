@@ -100,3 +100,21 @@ AI endpoints are served at `http://127.0.0.1:8787/api/v1/ai/*` and consumed by t
 - Generates Codex-style summaries and content update drafts.
 - Opens a **draft PR** for mandatory human review before publishing.
 - Details: `docs/AUTOMATED_CONTENT_UPDATES.md`
+
+
+## Complete CI/CD pipeline
+
+- Workflow: `.github/workflows/full-cicd.yml`
+- Builds frontend and backend
+- Runs checks/tests
+- Builds and pushes Docker images to GHCR
+- Runs Terraform plan (optional apply via manual dispatch input)
+- Deploys to Kubernetes using Helm
+- Sends Slack notification on pipeline failure
+
+Supporting assets:
+- `Dockerfile.frontend`
+- `Dockerfile.backend`
+- `helm/devops-learning/*`
+- `infra/terraform/*`
+- `docs/CICD_PIPELINE.md`

@@ -358,6 +358,101 @@
         "aws iam delete-role --role-name github-actions-ecr-eks",
         "rm -f .github/workflows/lab-cicd.yml"
       ]
+    },
+    {
+      "topic": "Docker",
+      "labType": "Break & Fix",
+      "objective": "Diagnose and fix a containerized service that starts but fails health checks due to bad entrypoint and port/probe mismatch.",
+      "architectureDiagramDescription": "Broken Docker image in ECR -> EKS Deployment pulls image -> Pod restarts and stays unready -> Service has no healthy endpoints.",
+      "intentionalMisconfiguration": [
+        "Dockerfile/command points to wrong binary path.",
+        "App listens on 8080 while probe/service expects 80.",
+        "Readiness endpoint configured as /healthz but app serves /health."
+      ],
+      "stepByStepCommands": [
+        "kubectl create ns breakfix-labs",
+        "kubectl -n breakfix-labs apply -f broken-docker-deploy.yaml",
+        "kubectl -n breakfix-labs get pods -w",
+        "kubectl -n breakfix-labs logs deploy/docker-breakfix --tail=100",
+        "kubectl -n breakfix-labs describe pod -l app=docker-breakfix",
+        "kubectl -n breakfix-labs get events --sort-by=.lastTimestamp | tail -n 30",
+        "kubectl -n breakfix-labs top pod",
+        "kubectl -n breakfix-labs edit deploy docker-breakfix",
+        "kubectl -n breakfix-labs rollout status deploy/docker-breakfix",
+        "kubectl -n breakfix-labs port-forward deploy/docker-breakfix 8080:8080",
+        "curl -i http://127.0.0.1:8080/health"
+      ],
+      "expectedOutput": [
+        "Before fix: CrashLoopBackOff and readiness probe failures.",
+        "Logs/events show executable path and probe/port mismatch.",
+        "After fix: pod Running 1/1 and health endpoint returns 200."
+      ],
+      "commonFailureCases": [
+        "Fixing command but not probe path keeps pod unready.",
+        "Skipping describe/events causes wrong root-cause assumptions.",
+        "kubectl top fails when metrics-server is not installed."
+      ],
+      "sreTroubleshootingWorkflow": [
+        "Start with user symptom and blast radius.",
+        "Correlate pod status + restart reason + events timeline.",
+        "Use logs for app truth and events for platform truth.",
+        "Validate entrypoint, ports, probes, and env assumptions.",
+        "Roll out minimal safe fix and verify health + traffic.",
+        "Document RCA and add CI guardrails to prevent recurrence."
+      ],
+      "solutionExplanation": "Real SRE triage combines logs, events, and metrics rather than changing config blindly. This issue is resolved by restoring runtime contract alignment (command, port, probe), validating rollout, and adding pre-deploy container/probe checks.",
+      "cleanupSteps": [
+        "kubectl delete ns breakfix-labs"
+      ]
+    },
+    {
+      "topic": "Kubernetes",
+      "labType": "Break & Fix",
+      "objective": "Debug and recover a failing workload where routing and readiness are broken by selector/probe misconfiguration.",
+      "architectureDiagramDescription": "Deployment labels do not match Service selectors -> no endpoints; readiness probe fails; HPA lacks usable metrics.",
+      "intentionalMisconfiguration": [
+        "Service selector uses app=payments-api while pods are labeled app=payment-api.",
+        "Readiness probe path set to /readyz though app only serves /health.",
+        "HPA configured but metrics pipeline unavailable."
+      ],
+      "stepByStepCommands": [
+        "kubectl create ns breakfix-k8s",
+        "kubectl -n breakfix-k8s apply -f broken-k8s-stack.yaml",
+        "kubectl -n breakfix-k8s get deploy,svc,pods,hpa",
+        "kubectl -n breakfix-k8s get endpoints payments-api -o yaml",
+        "kubectl -n breakfix-k8s describe svc payments-api",
+        "kubectl -n breakfix-k8s describe pod -l app=payment-api",
+        "kubectl -n breakfix-k8s logs deploy/payment-api --tail=100",
+        "kubectl -n breakfix-k8s get events --sort-by=.lastTimestamp | tail -n 40",
+        "kubectl -n breakfix-k8s top pod",
+        "kubectl -n breakfix-k8s patch svc payments-api -p '{\"spec\":{\"selector\":{\"app\":\"payment-api\"}}}'",
+        "kubectl -n breakfix-k8s edit deploy payment-api",
+        "kubectl -n breakfix-k8s rollout restart deploy/payment-api",
+        "kubectl -n breakfix-k8s rollout status deploy/payment-api",
+        "kubectl -n breakfix-k8s get endpoints payments-api"
+      ],
+      "expectedOutput": [
+        "Before fix: empty endpoints and readiness failures in events.",
+        "HPA shows <unknown> when metrics pipeline is broken.",
+        "After fix: endpoints populated and deployment Available."
+      ],
+      "commonFailureCases": [
+        "Fixing only Service or only Deployment labels (must match both).",
+        "Restarting rollout before fixing readiness probe path.",
+        "Treating HPA metric errors as app defects instead of observability defects."
+      ],
+      "sreTroubleshootingWorkflow": [
+        "Determine failure domain: routing, app, or scaling.",
+        "Trace request path Service -> Endpoints -> Pods.",
+        "Use events to build incident timeline.",
+        "Use logs for app confirmation and probe compatibility.",
+        "Separate metrics-pipeline failures from app failures.",
+        "Verify recovery against SLO-facing indicators."
+      ],
+      "solutionExplanation": "SRE troubleshooting is layered: restore routing first, then readiness, then scaling confidence. Selector mismatch caused no endpoints, probe path caused unready pods, and HPA unknown metrics required separate platform follow-up.",
+      "cleanupSteps": [
+        "kubectl delete ns breakfix-k8s"
+      ]
     }
   ]
 }

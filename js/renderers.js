@@ -57,23 +57,44 @@ export function renderToolGuides(container, toolGuides = []) {
 
 export function renderLabs(container, labs = []) {
   container.innerHTML = labs
-    .map(
-      (lab) => `
+    .map((lab) => {
+      const misconfig = lab.intentionalMisconfiguration
+        ? `
+        <strong>Intentional misconfiguration:</strong>
+        <ul>${list(lab.intentionalMisconfiguration)}</ul>
+      `
+        : '';
+
+      const workflow = lab.sreTroubleshootingWorkflow
+        ? `
+        <strong>SRE troubleshooting workflow:</strong>
+        <ol>${lab.sreTroubleshootingWorkflow.map((step) => `<li>${step}</li>`).join('')}</ol>
+      `
+        : '';
+
+      const solution = lab.solutionExplanation
+        ? `<p><strong>Solution walkthrough:</strong> ${lab.solutionExplanation}</p>`
+        : '';
+
+      return `
       <article class="card">
-        <h3>${lab.topic} Lab</h3>
+        <h3>${lab.topic} Lab${lab.labType ? ` — ${lab.labType}` : ''}</h3>
         <p><strong>Objective:</strong> ${lab.objective}</p>
         <p><strong>Architecture diagram description:</strong> ${lab.architectureDiagramDescription}</p>
+        ${misconfig}
         <strong>Step-by-step commands:</strong>
         <ol>${lab.stepByStepCommands.map((cmd) => `<li><code>${cmd}</code></li>`).join('')}</ol>
         <strong>Expected output:</strong>
         <ul>${list(lab.expectedOutput)}</ul>
         <strong>Common failure cases:</strong>
         <ul>${list(lab.commonFailureCases)}</ul>
+        ${workflow}
+        ${solution}
         <strong>Cleanup steps:</strong>
         <ol>${lab.cleanupSteps.map((step) => `<li><code>${step}</code></li>`).join('')}</ol>
       </article>
-    `
-    )
+    `;
+    })
     .join('');
 }
 

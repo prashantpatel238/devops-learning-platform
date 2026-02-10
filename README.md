@@ -25,6 +25,7 @@ scale limits, enterprise failure modes, cost trade-offs, security risks, and inc
   - expected output
   - common failure cases
   - cleanup steps
+- Break & Fix labs (Docker + Kubernetes) with intentional misconfigurations, debugging via logs/events/metrics, and SRE-style solution workflows.
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.

@@ -1,4 +1,5 @@
 const skillGrid = document.querySelector('#skill-grid');
+const toolsGrid = document.querySelector('#tools-grid');
 const articleList = document.querySelector('#article-list');
 const projectList = document.querySelector('#project-list');
 const roleSelect = document.querySelector('#role-select');
@@ -12,13 +13,8 @@ function relativeTime(dateString) {
   const diffMs = Date.now() - new Date(dateString).getTime();
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
 
-  if (diffHours < 1) {
-    return 'just now';
-  }
-
-  if (diffHours < 24) {
-    return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
-  }
+  if (diffHours < 1) return 'just now';
+  if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
 
   const diffDays = Math.floor(diffHours / 24);
   return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
@@ -31,7 +27,6 @@ function renderSkills(skills) {
       <article class="card">
         <h3>${skill.name}</h3>
         <p>${skill.description}</p>
-
         <p><strong>Production scenario:</strong> ${skill.productionScenario}</p>
         <p><strong>Scale:</strong> ${skill.scaleConsiderations}</p>
         <p><strong>Cost:</strong> ${skill.costImplications}</p>
@@ -53,14 +48,40 @@ function renderSkills(skills) {
     .join('');
 }
 
+function renderToolGuides(toolGuides = []) {
+  if (!toolsGrid) return;
+
+  toolsGrid.innerHTML = toolGuides
+    .map(
+      (guide) => `
+      <article class="card">
+        <h3>${guide.tool}</h3>
+        <p><strong>Why this exists:</strong> ${guide.whyItExists}</p>
+
+        <strong>When to use it:</strong>
+        <ul>
+          ${guide.whenToUse.map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+
+        <strong>When NOT to use it:</strong>
+        <ul>
+          ${guide.whenNotToUse.map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+
+        <p><strong>Alternatives used in industry:</strong> ${guide.alternatives.join(', ')}</p>
+        <p><strong>Startup example:</strong> ${guide.startupExample}</p>
+        <p><strong>Enterprise example:</strong> ${guide.enterpriseExample}</p>
+      </article>
+    `
+    )
+    .join('');
+}
+
 function initializeQuestionPicker(interviewQuestions) {
   questions = interviewQuestions;
   const roles = ['all', ...new Set(interviewQuestions.map((q) => q.role))];
 
-  roleSelect.innerHTML = roles
-    .map((role) => `<option value="${role}">${role}</option>`)
-    .join('');
-
+  roleSelect.innerHTML = roles.map((role) => `<option value="${role}">${role}</option>`).join('');
   roleSelect.value = 'all';
 }
 
@@ -74,7 +95,6 @@ function pickQuestion() {
   }
 
   const chosen = filtered[Math.floor(Math.random() * filtered.length)];
-
   questionCard.innerHTML = `
     <h3>${chosen.role}</h3>
     <p>${chosen.question}</p>
@@ -85,9 +105,7 @@ function pickQuestion() {
 async function fetchDevToArticles() {
   try {
     const response = await fetch('https://dev.to/api/articles?tag=devops&per_page=6');
-    if (!response.ok) {
-      throw new Error('Unable to fetch articles');
-    }
+    if (!response.ok) throw new Error('Unable to fetch articles');
 
     const articles = await response.json();
     articleList.innerHTML = articles
@@ -101,7 +119,7 @@ async function fetchDevToArticles() {
       `
       )
       .join('');
-  } catch (error) {
+  } catch {
     articleList.innerHTML =
       '<li>Could not load live articles right now. Please refresh later.</li>';
   }
@@ -111,16 +129,10 @@ async function fetchTrendingProjects() {
   try {
     const response = await fetch(
       'https://api.github.com/search/repositories?q=topic:devops&sort=stars&order=desc&per_page=6',
-      {
-        headers: {
-          Accept: 'application/vnd.github+json'
-        }
-      }
+      { headers: { Accept: 'application/vnd.github+json' } }
     );
 
-    if (!response.ok) {
-      throw new Error('Unable to fetch projects');
-    }
+    if (!response.ok) throw new Error('Unable to fetch projects');
 
     const data = await response.json();
     projectList.innerHTML = data.items
@@ -134,7 +146,7 @@ async function fetchTrendingProjects() {
       `
       )
       .join('');
-  } catch (error) {
+  } catch {
     projectList.innerHTML =
       '<li>Could not load trending projects right now. Please refresh later.</li>';
   }
@@ -145,6 +157,7 @@ async function initialize() {
   const content = await response.json();
 
   renderSkills(content.skills);
+  renderToolGuides(content.toolGuides);
   initializeQuestionPicker(content.interviewQuestions);
 
   lastUpdated.textContent = `Live sections updated ${new Date().toLocaleString()}`;

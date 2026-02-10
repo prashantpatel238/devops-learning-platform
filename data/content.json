@@ -127,5 +127,93 @@
       "question": "Your monthly cloud bill jumped 35% after regional expansion. Walk through a cost diagnosis plan and first three remediation actions.",
       "focus": "FinOps and cloud optimization"
     }
+  ],
+  "toolGuides": [
+    {
+      "tool": "Docker",
+      "whyItExists": "Docker standardizes how an application is packaged and run so developers, CI systems, and production environments behave consistently.",
+      "whenToUse": [
+        "You need reproducible runtime environments across laptops, CI, and servers.",
+        "You are decomposing a system into services with independent release cycles.",
+        "You want faster onboarding with predictable local development setup."
+      ],
+      "whenNotToUse": [
+        "Ultra-low latency or hardware-coupled workloads where container overhead/abstractions add unnecessary complexity.",
+        "Very small monoliths with infrequent releases where VM/process deployment is already stable.",
+        "Teams without operational maturity for image patching/scanning, where containers may increase risk instead of reducing it."
+      ],
+      "alternatives": [
+        "systemd services on VMs",
+        "Packer-baked AMIs",
+        "Cloud Run/App Service style PaaS"
+      ],
+      "startupExample": "A 6-engineer startup containers its API + worker + Postgres in docker-compose to keep environments consistent and ship quickly.",
+      "enterpriseExample": "A large bank uses hardened base images, signed artifacts, and registry policy controls so every team deploys compliant containers with traceability."
+    },
+    {
+      "tool": "Kubernetes",
+      "whyItExists": "Kubernetes automates container scheduling, service discovery, scaling, self-healing, and rollout patterns across clusters.",
+      "whenToUse": [
+        "You run many services and need standardized deployment, scaling, and health management.",
+        "You need multi-team platform abstractions with strong operational guardrails.",
+        "You require workload portability across cloud or hybrid environments."
+      ],
+      "whenNotToUse": [
+        "Early-stage products with 1-3 services where platform complexity outweighs benefits.",
+        "Teams lacking SRE/platform bandwidth for cluster lifecycle, upgrades, policy, and observability.",
+        "Simple batch apps that can run cheaper/simpler on managed serverless platforms."
+      ],
+      "alternatives": [
+        "ECS/Fargate",
+        "Nomad",
+        "Cloud Run",
+        "Heroku-like PaaS"
+      ],
+      "startupExample": "A startup stays on ECS Fargate until traffic and team size justify a dedicated platform team and deeper orchestration controls.",
+      "enterpriseExample": "An enterprise platform team runs multi-cluster Kubernetes with policy-as-code, service mesh, and golden paths for 200+ services."
+    },
+    {
+      "tool": "Terraform",
+      "whyItExists": "Terraform provides declarative, versioned infrastructure management so changes are reviewable, repeatable, and auditable.",
+      "whenToUse": [
+        "You manage cloud resources across environments/accounts and need consistency.",
+        "You want infrastructure changes reviewed through pull requests with rollback history.",
+        "You need reusable modules for standardized network, IAM, and platform patterns."
+      ],
+      "whenNotToUse": [
+        "One-off experimental sandboxes where setup speed matters more than lifecycle governance.",
+        "Very dynamic app-level config that is better managed by Kubernetes operators or app tooling.",
+        "Teams unable to enforce state hygiene and module discipline, causing IaC drift and lock contention."
+      ],
+      "alternatives": [
+        "CloudFormation",
+        "Pulumi",
+        "Crossplane",
+        "Native cloud console (short-term only)"
+      ],
+      "startupExample": "A startup starts with a small Terraform root module for VPC, database, and compute, then modularizes as environments grow.",
+      "enterpriseExample": "A global enterprise enforces approved Terraform modules and policy checks in CI to prevent insecure or non-compliant infrastructure changes."
+    },
+    {
+      "tool": "CI/CD",
+      "whyItExists": "CI/CD reduces deployment risk and lead time by automating build, test, security checks, release orchestration, and rollback workflows.",
+      "whenToUse": [
+        "You deploy frequently and need reliable repeatable delivery.",
+        "You want quality/security gates before changes reach production.",
+        "You need traceability from commit to artifact to deployment."
+      ],
+      "whenNotToUse": [
+        "Teams with no test strategy; automation without trustable tests just accelerates defects.",
+        "Highly regulated manual release checkpoints that are not yet encoded as pipeline controls.",
+        "Tiny internal tools updated quarterly where manual release is lower overhead."
+      ],
+      "alternatives": [
+        "Manual release checklist",
+        "GitOps controllers (Argo CD/Flux)",
+        "Vendor release pipelines"
+      ],
+      "startupExample": "A startup uses GitHub Actions with basic test + deploy jobs and gradually adds canary checks as customer impact grows.",
+      "enterpriseExample": "An enterprise runs layered pipelines with security scans, separation-of-duties approvals, staged rollouts, and automated rollback triggers."
+    }
   ]
 }

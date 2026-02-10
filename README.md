@@ -12,6 +12,12 @@ scale limits, enterprise failure modes, cost trade-offs, security risks, and inc
   - Cloud & IaC
   - Monitoring & Security
 - Interview prep questions framed as real production scenarios.
+- Tool decision guide for Docker, Kubernetes, Terraform, and CI/CD with:
+  - why the tool exists
+  - when to use it
+  - when NOT to use it
+  - alternatives used in industry
+  - startup vs enterprise examples
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.

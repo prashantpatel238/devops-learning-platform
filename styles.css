@@ -1,0 +1,130 @@
+:root {
+  color-scheme: dark;
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --accent: #38bdf8;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: linear-gradient(145deg, #020617, var(--bg));
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.hero {
+  border-bottom: 1px solid #334155;
+  padding: 3rem 0 2rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.updated {
+  color: var(--muted);
+}
+
+main {
+  padding: 2rem 0 3rem;
+}
+
+section {
+  margin-bottom: 2.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.card,
+.panel,
+.list li,
+.question-card {
+  background: color-mix(in oklab, var(--panel), black 8%);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+ul.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+select,
+button {
+  margin: 0.5rem 0.5rem 1rem 0;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #0b1220;
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+.question-card h3 {
+  margin-top: 0;
+}
+
+footer {
+  border-top: 1px solid #334155;
+  padding: 1rem 0 2rem;
+  color: var(--muted);
+}
+
+
+code {
+  display: inline-block;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  background: #0b1220;
+  border: 1px solid #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.85rem;
+}
+
+ol {
+  padding-left: 1.2rem;
+}
+
+li {
+  margin: 0.25rem 0;
+}

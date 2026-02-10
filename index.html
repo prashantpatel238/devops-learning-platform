@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DevOps Learning Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a href="#home" class="brand">DevOps Learning Hub</a>
+        <button id="menu-toggle" class="menu-toggle" type="button">☰ Menu</button>
+        <nav id="menu-links" class="menu-links">
+          <a class="menu-link active" href="#skills">Skills</a>
+          <a class="menu-link" href="#interview">Interview</a>
+          <a class="menu-link" href="#tools">Tools</a>
+          <a class="menu-link" href="#labs">Labs</a>
+          <a class="menu-link" href="#paths">Learning Paths</a>
+          <a class="menu-link" href="#ai">AI Tools</a>
+          <a class="menu-link" href="#articles">Articles</a>
+          <a class="menu-link" href="#projects">Projects</a>
+        </nav>
+      </div>
+    </header>
+
+    <header class="hero" id="home">
+      <div class="container">
+        <p class="badge">Always fresh learning + interview prep</p>
+        <h1>DevOps Learning Hub</h1>
+        <p>
+          Learn Linux, CI/CD, Docker, Kubernetes, Cloud, Monitoring, and Security
+          with production-focused guidance from a senior engineer mindset.
+        </p>
+        <p class="updated" id="last-updated">Checking latest content...</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="skills">
+        <h2>Skill Roadmap</h2>
+        <div id="skill-grid" class="grid"></div>
+      </section>
+
+      <section id="interview">
+        <h2>Interview Prep</h2>
+        <div class="panel">
+          <label for="role-select">Select role:</label>
+          <select id="role-select">
+            <option value="all">All roles</option>
+          </select>
+          <button id="new-question" type="button">Give me a question</button>
+          <article id="question-card" class="question-card">
+            <h3>Ready?</h3>
+            <p>Pick a role and click the button to start practicing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools">
+        <h2>Tool Decision Guide (Startup vs Enterprise)</h2>
+        <div id="tools-grid" class="grid"></div>
+      </section>
+
+      <section id="labs">
+        <h2>Hands-on Labs (AWS + Kubernetes)</h2>
+        <div id="labs-grid" class="grid"></div>
+      </section>
+
+
+
+      <section id="paths">
+        <h2>Structured DevOps Learning Paths</h2>
+        <div id="paths-grid" class="grid"></div>
+      </section>
+
+      <section id="ai">
+        <h2>AI DevOps Copilot (Codex-powered)</h2>
+        <div class="panel ai-panel">
+          <label for="ai-topic">Topic / Lesson title</label>
+          <input id="ai-topic" type="text" placeholder="e.g., Kubernetes readiness probes" />
+
+          <label for="ai-lesson-text">Lesson content</label>
+          <textarea id="ai-lesson-text" rows="6" placeholder="Paste lesson notes to generate explanations and questions..."></textarea>
+
+          <label for="ai-difficulty">Difficulty</label>
+          <select id="ai-difficulty">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate" selected>Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+
+          <div class="ai-actions">
+            <button id="ai-explain-btn" type="button">Explain this topic in simple terms</button>
+            <button id="ai-interview-btn" type="button">Generate interview questions from this lesson</button>
+            <button id="ai-scenario-btn" type="button">Create real-world scenario questions</button>
+            <button id="ai-outdated-btn" type="button">Detect outdated DevOps content</button>
+          </div>
+
+          <article id="ai-output" class="question-card">
+            <h3>AI output</h3>
+            <p>Use one of the actions above to generate Codex-assisted learning support.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="articles">
+        <h2>Latest DevOps Articles (auto-updated)</h2>
+        <ul id="article-list" class="list"></ul>
+      </section>
+
+      <section id="projects">
+        <h2>Trending Open Source Projects (auto-updated)</h2>
+        <ul id="project-list" class="list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Tip: Bookmark this page and revisit often — article/project sections refresh
+        on each visit.
+      </p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+global:
+  namespace: prod
+
+ingress:
+  host: devops-learning.example.com
+
+backend:
+  autoscaling:
+    minReplicas: 3
+    maxReplicas: 12
+
+frontend:
+  autoscaling:
+    minReplicas: 3
+    maxReplicas: 10

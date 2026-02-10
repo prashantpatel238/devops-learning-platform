@@ -18,6 +18,13 @@ scale limits, enterprise failure modes, cost trade-offs, security risks, and inc
   - when NOT to use it
   - alternatives used in industry
   - startup vs enterprise examples
+- Hands-on AWS + Kubernetes labs for Docker, Kubernetes, Terraform, and CI/CD with:
+  - objective
+  - architecture diagram description
+  - step-by-step commands
+  - expected output
+  - common failure cases
+  - cleanup steps
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.

@@ -1,5 +1,6 @@
 const skillGrid = document.querySelector('#skill-grid');
 const toolsGrid = document.querySelector('#tools-grid');
+const labsGrid = document.querySelector('#labs-grid');
 const articleList = document.querySelector('#article-list');
 const projectList = document.querySelector('#project-list');
 const roleSelect = document.querySelector('#role-select');
@@ -71,6 +72,43 @@ function renderToolGuides(toolGuides = []) {
         <p><strong>Alternatives used in industry:</strong> ${guide.alternatives.join(', ')}</p>
         <p><strong>Startup example:</strong> ${guide.startupExample}</p>
         <p><strong>Enterprise example:</strong> ${guide.enterpriseExample}</p>
+      </article>
+    `
+    )
+    .join('');
+}
+
+
+function renderLabs(labs = []) {
+  if (!labsGrid) return;
+
+  labsGrid.innerHTML = labs
+    .map(
+      (lab) => `
+      <article class="card">
+        <h3>${lab.topic} Lab</h3>
+        <p><strong>Objective:</strong> ${lab.objective}</p>
+        <p><strong>Architecture diagram description:</strong> ${lab.architectureDiagramDescription}</p>
+
+        <strong>Step-by-step commands:</strong>
+        <ol>
+          ${lab.stepByStepCommands.map((cmd) => `<li><code>${cmd}</code></li>`).join('')}
+        </ol>
+
+        <strong>Expected output:</strong>
+        <ul>
+          ${lab.expectedOutput.map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+
+        <strong>Common failure cases:</strong>
+        <ul>
+          ${lab.commonFailureCases.map((item) => `<li>${item}</li>`).join('')}
+        </ul>
+
+        <strong>Cleanup steps:</strong>
+        <ol>
+          ${lab.cleanupSteps.map((step) => `<li><code>${step}</code></li>`).join('')}
+        </ol>
       </article>
     `
     )
@@ -158,6 +196,7 @@ async function initialize() {
 
   renderSkills(content.skills);
   renderToolGuides(content.toolGuides);
+  renderLabs(content.labs);
   initializeQuestionPicker(content.interviewQuestions);
 
   lastUpdated.textContent = `Live sections updated ${new Date().toLocaleString()}`;

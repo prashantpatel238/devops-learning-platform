@@ -109,3 +109,22 @@ footer {
   padding: 1rem 0 2rem;
   color: var(--muted);
 }
+
+
+code {
+  display: inline-block;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  background: #0b1220;
+  border: 1px solid #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.85rem;
+}
+
+ol {
+  padding-left: 1.2rem;
+}
+
+li {
+  margin: 0.25rem 0;
+}

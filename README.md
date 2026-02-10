@@ -28,6 +28,8 @@ scale limits, enterprise failure modes, cost trade-offs, security risks, and inc
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.
+- Interactive sticky menu for navigating sections quickly.
+- Modular JavaScript architecture (`js/api.js`, `js/renderers.js`, `js/ui.js`, `js/main.js`) for easier maintenance.
 - Online hosting via GitHub Pages with auto-deploy workflow.
 
 ## Run locally

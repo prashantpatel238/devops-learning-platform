@@ -7,7 +7,22 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="hero">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a href="#home" class="brand">DevOps Learning Hub</a>
+        <button id="menu-toggle" class="menu-toggle" type="button">☰ Menu</button>
+        <nav id="menu-links" class="menu-links">
+          <a class="menu-link active" href="#skills">Skills</a>
+          <a class="menu-link" href="#interview">Interview</a>
+          <a class="menu-link" href="#tools">Tools</a>
+          <a class="menu-link" href="#labs">Labs</a>
+          <a class="menu-link" href="#articles">Articles</a>
+          <a class="menu-link" href="#projects">Projects</a>
+        </nav>
+      </div>
+    </header>
+
+    <header class="hero" id="home">
       <div class="container">
         <p class="badge">Always fresh learning + interview prep</p>
         <h1>DevOps Learning Hub</h1>
@@ -20,12 +35,12 @@
     </header>
 
     <main class="container">
-      <section>
+      <section id="skills">
         <h2>Skill Roadmap</h2>
         <div id="skill-grid" class="grid"></div>
       </section>
 
-      <section>
+      <section id="interview">
         <h2>Interview Prep</h2>
         <div class="panel">
           <label for="role-select">Select role:</label>
@@ -40,22 +55,22 @@
         </div>
       </section>
 
-
-      <section>
+      <section id="tools">
         <h2>Tool Decision Guide (Startup vs Enterprise)</h2>
         <div id="tools-grid" class="grid"></div>
       </section>
 
-      <section>
+      <section id="labs">
         <h2>Hands-on Labs (AWS + Kubernetes)</h2>
         <div id="labs-grid" class="grid"></div>
       </section>
-      <section>
+
+      <section id="articles">
         <h2>Latest DevOps Articles (auto-updated)</h2>
         <ul id="article-list" class="list"></ul>
       </section>
 
-      <section>
+      <section id="projects">
         <h2>Trending Open Source Projects (auto-updated)</h2>
         <ul id="project-list" class="list"></ul>
       </section>
@@ -68,6 +83,6 @@
       </p>
     </footer>
 
-    <script src="app.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>

@@ -31,6 +31,11 @@ scale limits, enterprise failure modes, cost trade-offs, security risks, and inc
   - Kubernetes Administrator
   - DevOps Engineer (AWS)
   - SRE Path
+- Learning indicators and badges across platform cards:
+  - Used in production
+  - Enterprise pattern
+  - Anti-pattern
+  - Interview favorite
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.

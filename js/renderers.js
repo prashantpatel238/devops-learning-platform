@@ -2,6 +2,37 @@ function list(items = []) {
   return items.map((item) => `<li>${item}</li>`).join('');
 }
 
+const INDICATOR_INFO = {
+  'Used in production': 'Commonly implemented by real engineering teams in live environments.',
+  'Enterprise pattern': 'Scales with governance, security controls, and cross-team operational standards.',
+  'Anti-pattern': 'A risky approach that often causes reliability, security, or maintainability issues.',
+  'Interview favorite': 'Frequently asked in DevOps/SRE interviews to test practical decision-making.'
+};
+
+function slug(text = '') {
+  return text.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function renderIndicators(indicators = []) {
+  if (!indicators.length) return '';
+
+  return `
+    <div class="indicator-row">
+      ${indicators
+        .map(
+          (item) =>
+            `<span class="indicator-badge indicator-${slug(item)}">${item}</span>`
+        )
+        .join('')}
+    </div>
+    <ul class="indicator-explanations">
+      ${indicators
+        .map((item) => `<li><strong>${item}:</strong> ${INDICATOR_INFO[item] || 'Important learning signal.'}</li>`)
+        .join('')}
+    </ul>
+  `;
+}
+
 export function relativeTime(dateString) {
   const diffMs = Date.now() - new Date(dateString).getTime();
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
@@ -25,6 +56,7 @@ export function renderSkills(container, skills = []) {
         <p><strong>Cost:</strong> ${skill.costImplications}</p>
         <p><strong>Security:</strong> ${skill.securityImplications}</p>
         <p><strong>Real incident:</strong> ${skill.incidentExample}</p>
+        ${renderIndicators(skill.indicators || ['Used in production', 'Enterprise pattern', 'Interview favorite'])}
         <strong>Common enterprise mistakes:</strong>
         <ul>${list(skill.commonMistakes)}</ul>
         <strong>Start with:</strong>
@@ -49,6 +81,7 @@ export function renderToolGuides(container, toolGuides = []) {
         <p><strong>Alternatives used in industry:</strong> ${guide.alternatives.join(', ')}</p>
         <p><strong>Startup example:</strong> ${guide.startupExample}</p>
         <p><strong>Enterprise example:</strong> ${guide.enterpriseExample}</p>
+        ${renderIndicators(guide.indicators || ['Used in production', 'Enterprise pattern', 'Anti-pattern', 'Interview favorite'])}
       </article>
     `
     )
@@ -90,6 +123,7 @@ export function renderLabs(container, labs = []) {
         <ul>${list(lab.commonFailureCases)}</ul>
         ${workflow}
         ${solution}
+        ${renderIndicators(lab.indicators || ['Used in production', 'Enterprise pattern', 'Anti-pattern', 'Interview favorite'])}
         <strong>Cleanup steps:</strong>
         <ol>${lab.cleanupSteps.map((step) => `<li><code>${step}</code></li>`).join('')}</ol>
       </article>
@@ -111,6 +145,7 @@ export function renderLearningPaths(container, paths = []) {
         <ul>${list(path.requiredLabs)}</ul>
         <strong>Skills gained:</strong>
         <ul>${list(path.skillsGained)}</ul>
+        ${renderIndicators(path.indicators || ['Used in production', 'Enterprise pattern', 'Interview favorite'])}
       </article>
     `
     )

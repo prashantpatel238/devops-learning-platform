@@ -230,3 +230,49 @@ textarea {
 .ai-actions button {
   margin: 0;
 }
+
+
+.indicator-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.6rem 0 0.7rem;
+}
+
+.indicator-badge {
+  display: inline-block;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  border: 1px solid #334155;
+}
+
+.indicator-used-in-production {
+  background: #052e16;
+  color: #86efac;
+  border-color: #166534;
+}
+
+.indicator-enterprise-pattern {
+  background: #0c4a6e;
+  color: #7dd3fc;
+  border-color: #0369a1;
+}
+
+.indicator-anti-pattern {
+  background: #450a0a;
+  color: #fca5a5;
+  border-color: #991b1b;
+}
+
+.indicator-interview-favorite {
+  background: #3f2b0a;
+  color: #fcd34d;
+  border-color: #a16207;
+}
+
+.indicator-explanations {
+  margin: 0.2rem 0 0.8rem;
+  padding-left: 1rem;
+  color: var(--muted);
+}

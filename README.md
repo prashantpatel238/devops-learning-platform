@@ -1,14 +1,21 @@
 # DevOps Learning Hub
 
-A lightweight website for learning DevOps skills and preparing for interviews.
+A practical DevOps learning website focused on **production reality** (not just theory):
+scale limits, enterprise failure modes, cost trade-offs, security risks, and incident response thinking.
 
 ## Features
 
-- Curated DevOps learning roadmap (Linux, CI/CD, Containers, Cloud, Monitoring).
-- Interview question practice by role.
+- Curated DevOps roadmap with practical, senior-level guidance for:
+  - Linux & Networking
+  - Version Control & CI/CD
+  - Containers & Orchestration
+  - Cloud & IaC
+  - Monitoring & Security
+- Interview prep questions framed as real production scenarios.
 - Auto-updated content blocks:
   - Latest DevOps articles from Dev.to API.
   - Trending DevOps open-source projects from GitHub Search API.
+- Online hosting via GitHub Pages with auto-deploy workflow.
 
 ## Run locally
 

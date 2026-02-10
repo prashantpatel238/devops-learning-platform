@@ -31,6 +31,18 @@ function renderSkills(skills) {
       <article class="card">
         <h3>${skill.name}</h3>
         <p>${skill.description}</p>
+
+        <p><strong>Production scenario:</strong> ${skill.productionScenario}</p>
+        <p><strong>Scale:</strong> ${skill.scaleConsiderations}</p>
+        <p><strong>Cost:</strong> ${skill.costImplications}</p>
+        <p><strong>Security:</strong> ${skill.securityImplications}</p>
+        <p><strong>Real incident:</strong> ${skill.incidentExample}</p>
+
+        <strong>Common enterprise mistakes:</strong>
+        <ul>
+          ${skill.commonMistakes.map((mistake) => `<li>${mistake}</li>`).join('')}
+        </ul>
+
         <strong>Start with:</strong>
         <ul>
           ${skill.resources.map((resource) => `<li>${resource}</li>`).join('')}

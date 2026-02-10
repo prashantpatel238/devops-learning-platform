@@ -98,6 +98,25 @@ export function renderLabs(container, labs = []) {
     .join('');
 }
 
+
+export function renderLearningPaths(container, paths = []) {
+  container.innerHTML = paths
+    .map(
+      (path) => `
+      <article class="card">
+        <h3>${path.name}</h3>
+        <strong>Required lessons:</strong>
+        <ul>${list(path.requiredLessons)}</ul>
+        <strong>Required labs:</strong>
+        <ul>${list(path.requiredLabs)}</ul>
+        <strong>Skills gained:</strong>
+        <ul>${list(path.skillsGained)}</ul>
+      </article>
+    `
+    )
+    .join('');
+}
+
 export function renderArticles(container, articles = []) {
   container.innerHTML = articles
     .map(

@@ -3,6 +3,7 @@ import {
   renderSkills,
   renderToolGuides,
   renderLabs,
+  renderLearningPaths,
   renderArticles,
   renderProjects
 } from './renderers.js';
@@ -13,6 +14,7 @@ const els = {
   skillGrid: document.querySelector('#skill-grid'),
   toolsGrid: document.querySelector('#tools-grid'),
   labsGrid: document.querySelector('#labs-grid'),
+  pathsGrid: document.querySelector('#paths-grid'),
   articleList: document.querySelector('#article-list'),
   projectList: document.querySelector('#project-list'),
   roleSelect: document.querySelector('#role-select'),
@@ -30,6 +32,7 @@ async function initialize() {
     renderSkills(els.skillGrid, content.skills);
     renderToolGuides(els.toolsGrid, content.toolGuides);
     renderLabs(els.labsGrid, content.labs);
+    renderLearningPaths(els.pathsGrid, content.learningPaths || []);
 
     interviewQuestions = content.interviewQuestions || [];
     initializeQuestionPicker(els.roleSelect, interviewQuestions);

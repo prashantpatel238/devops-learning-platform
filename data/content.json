@@ -454,5 +454,98 @@
         "kubectl delete ns breakfix-k8s"
       ]
     }
+  ],
+  "learningPaths": [
+    {
+      "name": "Beginner DevOps Engineer",
+      "requiredLessons": [
+        "Linux & Networking fundamentals",
+        "Git workflows and CI/CD basics",
+        "Docker image and container lifecycle",
+        "Cloud and Infrastructure as Code basics",
+        "Monitoring, logging, and incident fundamentals"
+      ],
+      "requiredLabs": [
+        "Docker Lab (ECR + EKS deployment)",
+        "Kubernetes Lab (Deployment, HPA, PDB)",
+        "Terraform Lab (VPC + remote state)",
+        "CI/CD Lab (GitHub Actions to EKS)"
+      ],
+      "skillsGained": [
+        "Build and deploy containerized services",
+        "Understand CI/CD release flow end-to-end",
+        "Apply core Kubernetes operational practices",
+        "Use Terraform for reproducible infrastructure",
+        "Troubleshoot basic production incidents"
+      ]
+    },
+    {
+      "name": "Kubernetes Administrator",
+      "requiredLessons": [
+        "Kubernetes control plane and worker model",
+        "Workload management (Deployments, Services, Ingress)",
+        "Probes, autoscaling, and disruption budgets",
+        "Cluster observability and troubleshooting",
+        "Kubernetes security and RBAC fundamentals"
+      ],
+      "requiredLabs": [
+        "Kubernetes Lab (rolling updates + HPA + PDB)",
+        "Kubernetes Break & Fix Lab (selector/probe mismatch)",
+        "Docker Break & Fix Lab (runtime/probe diagnostics)"
+      ],
+      "skillsGained": [
+        "Operate Kubernetes workloads safely",
+        "Debug routing/readiness failures using logs/events/metrics",
+        "Apply scaling and resilience controls",
+        "Implement secure cluster access patterns",
+        "Run production-style triage and recovery"
+      ]
+    },
+    {
+      "name": "DevOps Engineer (AWS)",
+      "requiredLessons": [
+        "AWS networking and IAM foundations",
+        "Terraform on AWS with state locking",
+        "ECR/EKS container delivery patterns",
+        "CI/CD with OIDC and GitHub Actions",
+        "Cost, reliability, and security guardrails"
+      ],
+      "requiredLabs": [
+        "Terraform Lab (AWS VPC + S3 backend + DynamoDB locks)",
+        "Docker Lab (build/push to ECR and deploy to EKS)",
+        "CI/CD Lab (OIDC + ECR + EKS rollout)",
+        "Kubernetes Break & Fix Lab"
+      ],
+      "skillsGained": [
+        "Design AWS-native DevOps workflows",
+        "Deploy secure, automated release pipelines",
+        "Manage infra lifecycle using Terraform",
+        "Operate EKS workloads with production checks",
+        "Balance delivery speed with cloud cost controls"
+      ]
+    },
+    {
+      "name": "SRE Path",
+      "requiredLessons": [
+        "SLO/SLI and error budget governance",
+        "Incident management and communication",
+        "Observability design (metrics, logs, traces)",
+        "Reliability patterns in Kubernetes and CI/CD",
+        "Post-incident RCA and prevention engineering"
+      ],
+      "requiredLabs": [
+        "Kubernetes Break & Fix Lab",
+        "Docker Break & Fix Lab",
+        "Kubernetes Lab (resilience controls)",
+        "CI/CD Lab (safe rollout and rollback flow)"
+      ],
+      "skillsGained": [
+        "Lead incident triage and resolution under pressure",
+        "Use telemetry to isolate failure domains quickly",
+        "Improve reliability via runbooks and guardrails",
+        "Enforce safe release strategies with rollback planning",
+        "Translate reliability risk to business impact"
+      ]
+    }
   ]
 }

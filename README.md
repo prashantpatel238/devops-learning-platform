@@ -32,6 +32,11 @@ scale limits, enterprise failure modes, cost trade-offs, security risks, and inc
 - Interactive sticky menu for navigating sections quickly.
 - Modular JavaScript architecture (`js/api.js`, `js/renderers.js`, `js/ui.js`, `js/main.js`) for easier maintenance.
 - Online hosting via GitHub Pages with auto-deploy workflow.
+- AI-powered Codex features via backend API (`backend/server.js`):
+  - Explain this topic in simple terms
+  - Generate interview questions from this lesson
+  - Create real-world scenario questions
+  - Detect outdated DevOps content
 
 ## Run locally
 
@@ -66,3 +71,12 @@ After deployment, your site will be available at:
 
 - Refactor plan: `docs/API_REFACTOR_PLAN.md`
 - Versioned API contract (OpenAPI): `docs/api/openapi.v1.yaml`
+
+
+## Run AI backend locally
+
+```bash
+node backend/server.js
+```
+
+AI endpoints are served at `http://127.0.0.1:8787/api/v1/ai/*` and consumed by the UI.

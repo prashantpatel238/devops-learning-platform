@@ -207,3 +207,26 @@ li {
     flex-wrap: wrap;
   }
 }
+
+
+input,
+textarea {
+  width: 100%;
+  margin: 0.35rem 0 1rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #0b1220;
+  color: var(--text);
+}
+
+.ai-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.ai-actions button {
+  margin: 0;
+}

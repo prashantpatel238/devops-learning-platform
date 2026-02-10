@@ -224,3 +224,20 @@ Core endpoints:
 - `GET /api/v1/content/tags`
 
 All content is filterable by tags/difficulty/version where applicable.
+
+
+## 12) Implemented AI feature integration (Codex-powered)
+
+Backend logic implemented in `backend/server.js` with versioned routes:
+- `POST /api/v1/ai/explain`
+- `POST /api/v1/ai/interview-questions`
+- `POST /api/v1/ai/real-world-scenarios`
+- `POST /api/v1/ai/detect-outdated`
+
+Frontend flow implemented in `js/ai.js` + `js/api.js` and rendered in `index.html` under `#ai` section.
+
+UI flow:
+1. User enters topic/lesson text.
+2. User clicks one of AI actions.
+3. Frontend calls corresponding `/api/v1/ai/*` endpoint.
+4. Response is rendered into `#ai-output`.

@@ -7,6 +7,7 @@ import {
   renderProjects
 } from './renderers.js';
 import { initializeQuestionPicker, pickQuestion, initializeMenu } from './ui.js';
+import { initializeAiFeatures } from './ai.js';
 
 const els = {
   skillGrid: document.querySelector('#skill-grid'),
@@ -39,6 +40,7 @@ async function initialize() {
 
     els.lastUpdated.textContent = `Live sections updated ${new Date().toLocaleString()}`;
     initializeMenu();
+    initializeAiFeatures(content);
 
     const [articles, projects] = await Promise.allSettled([
       fetchDevToArticles(),

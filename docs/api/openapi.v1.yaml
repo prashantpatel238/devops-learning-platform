@@ -132,6 +132,74 @@ paths:
                     type: array
                     items:
                       type: string
+
+  /api/v1/ai/explain:
+    post:
+      summary: Explain a DevOps topic in simple terms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic: { type: string }
+                lessonText: { type: string }
+      responses:
+        '200':
+          description: explanation
+  /api/v1/ai/interview-questions:
+    post:
+      summary: Generate interview questions from a lesson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lessonTitle: { type: string }
+                lessonText: { type: string }
+      responses:
+        '200':
+          description: generated questions
+  /api/v1/ai/real-world-scenarios:
+    post:
+      summary: Generate real-world scenario questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic: { type: string }
+                difficulty: { type: string, enum: [beginner, intermediate, advanced] }
+      responses:
+        '200':
+          description: scenario questions
+  /api/v1/ai/detect-outdated:
+    post:
+      summary: Detect potentially outdated DevOps content
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contentItems:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title: { type: string }
+                      body: { type: string }
+                      lastReviewedAt: { type: string, format: date-time }
+      responses:
+        '200':
+          description: outdated content findings
+
 components:
   schemas:
     ContentVersion:

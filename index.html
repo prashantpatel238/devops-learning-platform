@@ -16,6 +16,7 @@
           <a class="menu-link" href="#interview">Interview</a>
           <a class="menu-link" href="#tools">Tools</a>
           <a class="menu-link" href="#labs">Labs</a>
+          <a class="menu-link" href="#ai">AI Tools</a>
           <a class="menu-link" href="#articles">Articles</a>
           <a class="menu-link" href="#projects">Projects</a>
         </nav>
@@ -63,6 +64,37 @@
       <section id="labs">
         <h2>Hands-on Labs (AWS + Kubernetes)</h2>
         <div id="labs-grid" class="grid"></div>
+      </section>
+
+
+      <section id="ai">
+        <h2>AI DevOps Copilot (Codex-powered)</h2>
+        <div class="panel ai-panel">
+          <label for="ai-topic">Topic / Lesson title</label>
+          <input id="ai-topic" type="text" placeholder="e.g., Kubernetes readiness probes" />
+
+          <label for="ai-lesson-text">Lesson content</label>
+          <textarea id="ai-lesson-text" rows="6" placeholder="Paste lesson notes to generate explanations and questions..."></textarea>
+
+          <label for="ai-difficulty">Difficulty</label>
+          <select id="ai-difficulty">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate" selected>Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+
+          <div class="ai-actions">
+            <button id="ai-explain-btn" type="button">Explain this topic in simple terms</button>
+            <button id="ai-interview-btn" type="button">Generate interview questions from this lesson</button>
+            <button id="ai-scenario-btn" type="button">Create real-world scenario questions</button>
+            <button id="ai-outdated-btn" type="button">Detect outdated DevOps content</button>
+          </div>
+
+          <article id="ai-output" class="question-card">
+            <h3>AI output</h3>
+            <p>Use one of the actions above to generate Codex-assisted learning support.</p>
+          </article>
+        </div>
       </section>
 
       <section id="articles">

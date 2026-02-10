@@ -39,7 +39,7 @@ export function initializeMenu() {
   });
 
   window.addEventListener('scroll', () => {
-    const sections = ['skills', 'interview', 'tools', 'labs', 'articles', 'projects'];
+    const sections = ['skills', 'interview', 'tools', 'labs', 'ai', 'articles', 'projects'];
     let current = 'skills';
 
     sections.forEach((id) => {

@@ -357,3 +357,10 @@ A conceptual migration plan for backend-served learning content, versioned APIs,
 - `docs/api/openapi.v1.yaml`
 
 This includes proposed API contracts and target folder structure changes.
+
+
+## 14) AI feature implementation details
+
+- `backend/server.js` (backend AI endpoints)
+- `js/ai.js` (frontend AI flow orchestration)
+- `docs/AI_FEATURES.md` (feature contracts + UI flow diagrams)

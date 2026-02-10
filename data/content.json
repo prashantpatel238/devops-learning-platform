@@ -1,0 +1,81 @@
+{
+  "skills": [
+    {
+      "name": "Linux & Networking",
+      "description": "Command line, SSH, permissions, processes, TCP/IP, DNS, HTTP fundamentals.",
+      "resources": [
+        "Linux Journey",
+        "The Linux Command Line (book)",
+        "Practical Networking"
+      ]
+    },
+    {
+      "name": "Version Control & CI/CD",
+      "description": "Git workflows, branching strategies, pipeline design, test automation, and release management.",
+      "resources": [
+        "Git SCM book",
+        "GitHub Actions docs",
+        "Jenkins Pipeline docs"
+      ]
+    },
+    {
+      "name": "Containers & Orchestration",
+      "description": "Docker image lifecycle, registries, Kubernetes core objects, deployment patterns and troubleshooting.",
+      "resources": [
+        "Docker docs",
+        "Kubernetes docs",
+        "Kubernetes the Hard Way"
+      ]
+    },
+    {
+      "name": "Cloud & IaC",
+      "description": "Cloud architecture, Terraform modules, state management, and immutable infrastructure.",
+      "resources": [
+        "Terraform docs",
+        "AWS Well-Architected",
+        "Azure Architecture Center"
+      ]
+    },
+    {
+      "name": "Monitoring & Security",
+      "description": "Logging, metrics, alerting SLOs, secrets management, and shift-left security controls.",
+      "resources": [
+        "Prometheus docs",
+        "Grafana docs",
+        "OWASP cheat sheets"
+      ]
+    }
+  ],
+  "interviewQuestions": [
+    {
+      "role": "DevOps Engineer",
+      "question": "How would you design a CI/CD pipeline that supports blue-green deployments with automatic rollback?",
+      "focus": "Pipeline strategy"
+    },
+    {
+      "role": "DevOps Engineer",
+      "question": "What Kubernetes probes exist and when should liveness, readiness, and startup probes be used?",
+      "focus": "Kubernetes"
+    },
+    {
+      "role": "SRE",
+      "question": "How do you define SLO, SLI, and error budget for a customer-facing API?",
+      "focus": "Reliability engineering"
+    },
+    {
+      "role": "SRE",
+      "question": "A latency alert fired after a release. What is your incident triage checklist?",
+      "focus": "Incident response"
+    },
+    {
+      "role": "Platform Engineer",
+      "question": "How would you build a self-service developer platform while keeping security guardrails?",
+      "focus": "Platform architecture"
+    },
+    {
+      "role": "Cloud Engineer",
+      "question": "How do you minimize cloud costs across environments without reducing reliability?",
+      "focus": "Cost optimization"
+    }
+  ]
+}

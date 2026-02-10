@@ -56,3 +56,30 @@ This repository includes a full CI/CD pipeline implemented via GitHub Actions in
 - `infra/terraform/modules/network/*`
 
 This is a baseline scaffold that can be expanded with EKS node groups, IAM, and supporting infrastructure.
+
+---
+
+## Production Kubernetes requirements and why they matter
+
+### 1) Horizontal Pod Autoscaler (HPA)
+- **Why required:** Production traffic is bursty. HPA prevents manual scaling bottlenecks and reduces downtime risk during spikes.
+- **Implemented:** `frontend-hpa.yaml`, `backend-hpa.yaml` using CPU utilization targets.
+
+### 2) Resource requests and limits
+- **Why required:** Prevents noisy-neighbor issues and enforces fair scheduling. Limits stop runaway workloads from starving cluster nodes.
+- **Implemented:** `values.yaml` resource blocks for frontend/backend and deployment templates.
+
+### 3) Liveness/readiness probes
+- **Why required:** Readiness prevents traffic to unhealthy pods; liveness restarts stuck processes automatically.
+- **Implemented:** HTTP health probes in frontend/backend Deployments.
+
+### 4) Secrets management
+- **Why required:** API keys/signing values must never be hardcoded in images or plaintext config maps.
+- **Implemented:** `backend-secret.yaml` and `envFrom.secretRef` in backend deployment.
+
+### 5) Separate namespaces (dev/stage/prod)
+- **Why required:** Environment isolation reduces blast radius, simplifies RBAC/policy boundaries, and enables safe promotion.
+- **Implemented:**
+  - Namespace template (`namespace.yaml`)
+  - environment values files (`values-dev.yaml`, `values-stage.yaml`, `values-prod.yaml`)
+  - CI deploy defaults to prod values.

@@ -1,0 +1,15 @@
+global:
+  namespace: stage
+
+ingress:
+  host: stage.devops-learning.example.com
+
+backend:
+  autoscaling:
+    minReplicas: 2
+    maxReplicas: 6
+
+frontend:
+  autoscaling:
+    minReplicas: 2
+    maxReplicas: 6

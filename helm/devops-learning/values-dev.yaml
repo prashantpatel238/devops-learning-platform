@@ -1,0 +1,15 @@
+global:
+  namespace: dev
+
+ingress:
+  host: dev.devops-learning.example.com
+
+backend:
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 3
+
+frontend:
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 3

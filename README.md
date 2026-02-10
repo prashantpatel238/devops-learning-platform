@@ -111,6 +111,12 @@ AI endpoints are served at `http://127.0.0.1:8787/api/v1/ai/*` and consumed by t
 - Runs Terraform plan (optional apply via manual dispatch input)
 - Deploys to Kubernetes using Helm
 - Sends Slack notification on pipeline failure
+- Kubernetes production hardening included:
+  - HPA
+  - resource requests/limits
+  - liveness/readiness probes
+  - secrets management
+  - separate dev/stage/prod namespaces
 
 Supporting assets:
 - `Dockerfile.frontend`

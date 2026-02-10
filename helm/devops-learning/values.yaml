@@ -1,5 +1,6 @@
 global:
   imagePullPolicy: IfNotPresent
+  namespace: dev
 
 frontend:
   replicaCount: 2
@@ -9,6 +10,18 @@ frontend:
   service:
     type: ClusterIP
     port: 80
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    targetCPUUtilizationPercentage: 70
 
 backend:
   replicaCount: 2
@@ -18,6 +31,24 @@ backend:
   service:
     type: ClusterIP
     port: 8787
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 65
+  secret:
+    create: true
+    name: devops-learning-backend-secret
+    data:
+      AI_API_KEY: "replace-me"
+      CONTENT_SIGNING_KEY: "replace-me"
 
 ingress:
   enabled: true

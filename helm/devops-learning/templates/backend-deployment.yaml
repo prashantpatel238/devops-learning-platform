@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "devops-learning-platform.fullname" . }}-backend
+  namespace: {{ .Values.global.namespace }}
 spec:
   replicas: {{ .Values.backend.replicaCount }}
   selector:
@@ -20,9 +21,22 @@ spec:
           imagePullPolicy: {{ .Values.global.imagePullPolicy }}
           ports:
             - containerPort: 8787
+          envFrom:
+            - secretRef:
+                name: {{ .Values.backend.secret.name }}
+          resources:
+{{ toYaml .Values.backend.resources | indent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8787
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /api/v1/health
               port: 8787
             initialDelaySeconds: 5
             periodSeconds: 10
+            failureThreshold: 3

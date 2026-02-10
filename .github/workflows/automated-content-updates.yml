@@ -1,0 +1,55 @@
+name: Automated DevOps content updates
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  detect-and-draft:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Detect upstream tool changes and generate draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/content_change_watcher.py
+
+      - name: Create draft PR for human approval
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/content-updates
+          commit-message: "chore(content): automated DevOps tool update draft"
+          title: "chore(content): automated DevOps tooling update draft (human approval required)"
+          body: |
+            ## Automated content update draft
+
+            This PR was generated automatically after detecting upstream tool changes.
+
+            ### Required human approval before publishing
+            - [ ] Validate tool release impact (Kubernetes/Terraform/Docker).
+            - [ ] Review Codex-generated summary for accuracy.
+            - [ ] Update/confirm labs and interview content.
+            - [ ] Approve this PR manually before merge.
+
+            Generated artifacts:
+            - `content/auto-updates/latest-update.md`
+            - `content/auto-updates/latest-update.json`
+            - `content/auto-updates/tool_versions.json`
+
+            > Publishing must only happen after manual human review and approval.
+          draft: true
+          delete-branch: true
